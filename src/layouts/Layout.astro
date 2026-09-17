@@ -18,18 +18,19 @@
 
 <style is:global>
 	:root {
-		--bg: #f4f7fb;
-		--bg-soft: #eef4ff;
-		--panel: #ffffff;
-		--panel-strong: #edf3ff;
-		--primary: #1e4ed8;
-		--primary-strong: #163bb3;
-		--secondary: #7c3aed;
-		--text: #111827;
-		--muted: #4b5563;
-		--line: rgba(17, 24, 39, 0.08);
-		--card: #ffffff;
-		--shadow: 0 24px 55px rgba(15, 23, 42, 0.09);
+		--bg: #f3f4ef;
+		--bg-soft: #e7ece8;
+		--panel: #fbfcf8;
+		--panel-strong: #dce8e7;
+		--primary: #17627a;
+		--primary-strong: #0c3d52;
+		--accent: #16a041;
+		--accent-strong: #08712f;
+		--text: #10232a;
+		--muted: #53656a;
+		--line: rgba(16, 35, 42, 0.14);
+		--card: #fbfcf8;
+		--shadow: 0 24px 55px rgba(12, 61, 82, 0.13);
 	}
 
 	* {
@@ -42,8 +43,11 @@
 
 	body {
 		margin: 0;
-		font-family: Inter, 'Segoe UI', sans-serif;
-		background: linear-gradient(180deg, #f9fbff 0%, #eef4ff 100%);
+		font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+		background:
+			linear-gradient(135deg, rgba(22, 160, 65, 0.05) 0 1px, transparent 1px 32px),
+			linear-gradient(180deg, #f8f9f4 0%, var(--bg-soft) 100%);
+		background-size: 32px 32px, 100% 100%;
 		color: var(--text);
 		line-height: 1.6;
 	}

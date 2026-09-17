@@ -1,12 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import brandLogo from '../assets/informaticasuperior.png';
 ---
 
 <Layout>
 	<header class="topbar">
 		<div class="container nav">
 			<div class="brand">
-				<span class="brand-mark">I</span>
+				<img class="brand-logo" src={brandLogo.src} alt="" width="42" height="54" />
 				<span>Informática Superior</span>
 			</div>
 			<nav class="nav-links">
@@ -21,9 +22,10 @@ import Layout from '../layouts/Layout.astro';
 
 	<main>
 		<section class="hero">
+			<img class="hero-watermark" src={brandLogo.src} alt="" aria-hidden="true" />
 			<div class="container hero-grid">
 				<div class="hero-copy">
-					<p class="eyebrow">Desarrollo de software · Web · Ecommerce</p>
+					<p class="eyebrow">Tecnología que toma impulso</p>
 					<h1>Soluciones digitales para negocios que quieren crecer.</h1>
 					<p class="lead">
 						Informática Superior diseña páginas web, tiendas online y software a medida para ayudar a empresas a
@@ -41,6 +43,8 @@ import Layout from '../layouts/Layout.astro';
 				</div>
 
 				<div class="hero-visual">
+					<!-- <div class="orbit-label orbit-label-top">Estrategia</div>
+					<div class="orbit-label orbit-label-bottom">Evolución</div> -->
 					<div class="dashboard-card">
 						<div class="card-header">
 							<span class="dot green"></span>
@@ -280,19 +284,15 @@ import Layout from '../layouts/Layout.astro';
 		display: inline-flex;
 		align-items: center;
 		gap: 10px;
-		font-weight: 700;
-		letter-spacing: 0.04em;
+		font-weight: 800;
+		letter-spacing: 0.02em;
 	}
 
-	.brand-mark {
-		display: inline-grid;
-		place-items: center;
-		width: 28px;
-		height: 28px;
-		border-radius: 10px;
-		background: linear-gradient(135deg, var(--primary), var(--secondary));
-		color: #04111b;
-		font-weight: 800;
+	.brand-logo {
+		display: block;
+		width: 42px;
+		height: 54px;
+		object-fit: contain;
 	}
 
 	.nav-links {
@@ -312,7 +312,8 @@ import Layout from '../layouts/Layout.astro';
 		justify-content: center;
 		gap: 8px;
 		padding: 0.9rem 1.4rem;
-		border-radius: 12px;
+		border-radius: 2px;
+		clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
 		font-weight: 700;
 		transition: transform 0.2s ease, box-shadow 0.2s ease;
 	}
@@ -324,7 +325,7 @@ import Layout from '../layouts/Layout.astro';
 	.btn-primary {
 		background: linear-gradient(135deg, var(--primary), var(--primary-strong));
 		color: #ffffff;
-		box-shadow: 0 14px 26px rgba(30, 78, 216, 0.2);
+		box-shadow: 0 14px 26px rgba(12, 61, 82, 0.2);
 	}
 
 	.btn-secondary {
@@ -334,10 +335,27 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.hero {
-		padding: 88px 0 50px;
+		position: relative;
+		overflow: hidden;
+		padding: 104px 0 66px;
+	}
+
+	.hero-watermark {
+		position: absolute;
+		z-index: 0;
+		top: 50%;
+		right: clamp(-40px, 8vw, 130px);
+		width: clamp(700px, 76vw, 1050px);
+		height: auto;
+		opacity: 0.2;
+		transform: translateY(-50%) rotate(-8deg);
+		pointer-events: none;
+		user-select: none;
 	}
 
 	.hero-grid {
+		position: relative;
+		z-index: 1;
 		display: grid;
 		grid-template-columns: 1.1fr 0.9fr;
 		align-items: center;
@@ -359,13 +377,15 @@ import Layout from '../layouts/Layout.astro';
 	.cta-box h2 {
 		margin: 0;
 		line-height: 1.08;
-		letter-spacing: -0.05em;
+		letter-spacing: -0.035em;
 	}
 
 	.hero-copy h1 {
 		font-size: clamp(2.8rem, 5vw, 5rem);
 		max-width: 650px;
 	}
+
+	.hero-copy h1::first-line { color: var(--primary-strong); }
 
 	.lead {
 		max-width: 620px;
@@ -406,16 +426,34 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.hero-visual {
+		position: relative;
 		display: flex;
 		justify-content: center;
 	}
+
+	.orbit-label {
+		position: absolute;
+		z-index: 2;
+		padding: 7px 12px;
+		background: var(--accent);
+		color: #f8f9f4;
+		font-size: 0.72rem;
+		font-weight: 800;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		clip-path: polygon(7px 0, 100% 0, calc(100% - 7px) 100%, 0 100%);
+	}
+
+	.orbit-label-top { top: -20px; right: 5%; transform: rotate(8deg); }
+	.orbit-label-bottom { bottom: -22px; left: 4%; background: var(--primary); transform: rotate(-8deg); }
 
 	.dashboard-card {
 		width: min(100%, 520px);
 		padding: 22px;
 		border: 1px solid var(--line);
-		border-radius: 28px;
-		background: #ffffff;
+		border-radius: 0;
+		background: var(--panel);
+		clip-path: polygon(0 18px, 18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%);
 		box-shadow: var(--shadow);
 	}
 
@@ -429,7 +467,8 @@ import Layout from '../layouts/Layout.astro';
 		display: inline-block;
 		width: 12px;
 		height: 12px;
-		border-radius: 50%;
+		border-radius: 0;
+		transform: rotate(45deg);
 	}
 
 	.dot.green { background: #34d399; }
@@ -441,7 +480,8 @@ import Layout from '../layouts/Layout.astro';
 		grid-template-columns: 1fr 180px;
 		gap: 16px;
 		padding: 16px;
-		border-radius: 18px;
+		border-radius: 0;
+		clip-path: polygon(0 10px, 10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
 		background: rgba(255, 255, 255, 0.02);
 		border: 1px solid var(--line);
 	}
@@ -458,7 +498,7 @@ import Layout from '../layouts/Layout.astro';
 		display: block;
 		flex: 1;
 		border-radius: 12px 12px 0 0;
-		background: linear-gradient(180deg, var(--primary), #7ea2ff);
+		background: linear-gradient(180deg, var(--accent), var(--primary));
 	}
 
 	.chart-panel {
@@ -466,9 +506,9 @@ import Layout from '../layouts/Layout.astro';
 		flex-direction: column;
 		justify-content: center;
 		padding: 18px;
-		border-radius: 18px;
-		background: linear-gradient(135deg, rgba(30, 78, 216, 0.08), rgba(124, 156, 255, 0.10));
-		border: 1px solid rgba(30, 78, 216, 0.14);
+		border-radius: 0;
+		background: linear-gradient(135deg, rgba(23, 98, 122, 0.1), rgba(22, 160, 65, 0.1));
+		border: 1px solid rgba(23, 98, 122, 0.18);
 	}
 
 	.chart-panel p,
@@ -497,7 +537,7 @@ import Layout from '../layouts/Layout.astro';
 
 	.metrics-grid div {
 		padding: 18px;
-		border-radius: 18px;
+		border-radius: 0;
 		background: rgba(255, 255, 255, 0.02);
 		border: 1px solid var(--line);
 	}
@@ -571,7 +611,8 @@ import Layout from '../layouts/Layout.astro';
 	.testimonial-grid blockquote {
 		background: var(--card);
 		border: 1px solid var(--line);
-		border-radius: 24px;
+		border-radius: 0;
+		clip-path: polygon(0 14px, 14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
 		padding: 24px;
 	}
 
@@ -585,8 +626,9 @@ import Layout from '../layouts/Layout.astro';
 		justify-content: center;
 		width: 52px;
 		height: 52px;
-		border-radius: 14px;
-		background: rgba(30, 78, 216, 0.08);
+		border-radius: 0;
+		background: rgba(23, 98, 122, 0.1);
+		clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%);
 		color: var(--primary);
 		font-weight: 800;
 		margin-bottom: 18px;
@@ -623,8 +665,9 @@ import Layout from '../layouts/Layout.astro';
 		place-items: center;
 		width: 44px;
 		height: 44px;
-		border-radius: 12px;
-		background: rgba(30, 78, 216, 0.08);
+		border-radius: 0;
+		background: rgba(22, 160, 65, 0.12);
+		clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%);
 		color: var(--primary);
 		font-size: 1rem;
 	}
@@ -644,9 +687,9 @@ import Layout from '../layouts/Layout.astro';
 		place-items: center;
 		width: 46px;
 		height: 46px;
-		border-radius: 12px;
+		border-radius: 0;
 		font-weight: 800;
-		background: linear-gradient(135deg, rgba(30, 78, 216, 0.08), rgba(124, 156, 255, 0.08));
+		background: linear-gradient(135deg, rgba(23, 98, 122, 0.12), rgba(22, 160, 65, 0.12));
 		color: var(--primary);
 		margin-bottom: 20px;
 	}
@@ -701,9 +744,10 @@ import Layout from '../layouts/Layout.astro';
 		align-items: center;
 		gap: 20px;
 		padding: 28px 32px;
-		background: linear-gradient(135deg, rgba(30, 78, 216, 0.05), rgba(124, 156, 255, 0.06));
+		background: linear-gradient(135deg, rgba(23, 98, 122, 0.1), rgba(22, 160, 65, 0.1));
 		border: 1px solid var(--line);
-		border-radius: 24px;
+		border-radius: 0;
+		clip-path: polygon(0 18px, 18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%);
 	}
 
 	.footer {
@@ -766,6 +810,13 @@ import Layout from '../layouts/Layout.astro';
 		.section {
 			padding-top: 80px;
 			padding-bottom: 80px;
+		}
+
+		.hero-watermark {
+			top: 34%;
+			right: -90px;
+			width: 760px;
+			opacity: 0.16;
 		}
 
 		.cards-grid,
