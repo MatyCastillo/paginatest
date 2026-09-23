@@ -1,0 +1,249 @@
+---
+const technologies = [
+	{ name: 'React', category: 'Frontend', logo: 'react', tone: 'blue' },
+	{ name: 'Node.js', category: 'Backend', logo: 'nodedotjs', tone: 'green' },
+	{ name: '.NET', category: 'Backend', logo: 'dotnet', tone: 'violet' },
+	{ name: 'MySQL', category: 'Datos', logo: 'mysql', tone: 'orange' },
+	{ name: 'SQL Server', category: 'Datos', logo: 'microsoftsqlserver', tone: 'red' },
+	{ name: 'TypeScript', category: 'Frontend', logo: 'typescript', tone: 'blue' },
+	{ name: 'Astro', category: 'Web', logo: 'astro', tone: 'coral' },
+	{ name: 'JavaScript', category: 'Frontend', logo: 'javascript', tone: 'yellow' },
+	{ name: 'C#', category: 'Backend', logo: 'csharp', tone: 'violet' },
+	{ name: 'Git', category: 'Herramientas', logo: 'git', tone: 'orange' },
+];
+---
+
+<section class="tech-section" aria-labelledby="tech-title">
+	<div class="container tech-heading">
+		<div>
+			<p class="eyebrow">Nuestro stack</p>
+			<h2 id="tech-title">Tecnología que se adapta a cada desafío.</h2>
+		</div>
+		<p class="tech-intro">Combinamos herramientas confiables para crear productos rápidos, escalables y fáciles de mantener.</p>
+	</div>
+
+	<div class="tech-carousel" data-tech-carousel>
+		<div class="tech-viewport">
+			<div class="tech-track" data-tech-track>
+				{technologies.map((technology) => (
+					<article class="tech-card" data-tech-card>
+						<span class={`tech-mark ${technology.tone}`} aria-hidden="true">
+							<img src={`https://cdn.simpleicons.org/${technology.logo}`} alt="" width="28" height="28" loading="lazy" />
+						</span>
+						<div>
+							<h3>{technology.name}</h3>
+							<p>{technology.category}</p>
+						</div>
+					</article>
+				))}
+				{technologies.map((technology) => (
+					<article class="tech-card" aria-hidden="true">
+						<span class={`tech-mark ${technology.tone}`}>
+							<img src={`https://cdn.simpleicons.org/${technology.logo}`} alt="" width="28" height="28" loading="lazy" />
+						</span>
+						<div>
+							<h3>{technology.name}</h3>
+							<p>{technology.category}</p>
+						</div>
+					</article>
+				))}
+			</div>
+		</div>
+
+		<div class="tech-controls">
+			<button class="tech-control" type="button" data-tech-direction="previous" aria-label="Tecnologías anteriores">←</button>
+			<button class="tech-control tech-toggle" type="button" data-tech-toggle aria-label="Pausar carrusel" aria-pressed="false">
+				<span class="pause-icon" aria-hidden="true">Ⅱ</span>
+				<span class="play-icon" aria-hidden="true">▶</span>
+			</button>
+			<button class="tech-control" type="button" data-tech-direction="next" aria-label="Siguientes tecnologías">→</button>
+		</div>
+	</div>
+</section>
+
+<script>
+	const carousel = document.querySelector('[data-tech-carousel]');
+	const track = carousel?.querySelector('[data-tech-track]');
+	const toggle = carousel?.querySelector('[data-tech-toggle]');
+	const cards = carousel?.querySelectorAll('[data-tech-card]');
+
+	if (carousel && track && toggle && cards?.length) {
+		const cardWidth = () => cards[0].getBoundingClientRect().width + 16;
+
+		const move = (direction: number) => {
+			track.scrollBy({ left: direction * cardWidth(), behavior: 'smooth' });
+		};
+
+		carousel.querySelector('[data-tech-direction="previous"]')?.addEventListener('click', () => move(-1));
+		carousel.querySelector('[data-tech-direction="next"]')?.addEventListener('click', () => move(1));
+
+		toggle.addEventListener('click', () => {
+			const paused = carousel.classList.toggle('is-paused');
+			toggle.setAttribute('aria-pressed', String(paused));
+			toggle.setAttribute('aria-label', paused ? 'Reanudar carrusel' : 'Pausar carrusel');
+		});
+	}
+</script>
+
+<style>
+	.tech-section {
+		overflow: hidden;
+		padding: 86px 0 92px;
+		background: linear-gradient(120deg, rgba(23, 98, 122, 0.07), rgba(22, 160, 65, 0.04));
+		border-top: 1px solid var(--line);
+		border-bottom: 1px solid var(--line);
+	}
+
+	.tech-heading {
+		display: flex;
+		align-items: end;
+		justify-content: space-between;
+		gap: 32px;
+		margin-bottom: 38px;
+	}
+
+	.tech-heading h2 {
+		max-width: 620px;
+		margin: 0;
+		font-size: clamp(2rem, 4vw, 3.1rem);
+		line-height: 1.08;
+		letter-spacing: -0.035em;
+	}
+
+	.tech-intro {
+		max-width: 340px;
+		margin: 0 0 4px;
+		color: var(--muted);
+	}
+
+	.tech-carousel {
+		position: relative;
+	}
+
+	.tech-viewport {
+		overflow: hidden;
+		mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+	}
+
+	.tech-track {
+		display: flex;
+		width: max-content;
+		gap: 16px;
+		animation: tech-slide 34s linear infinite;
+	}
+
+	.tech-carousel:hover .tech-track,
+	.tech-carousel:focus-within .tech-track,
+	.tech-carousel.is-paused .tech-track {
+		animation-play-state: paused;
+	}
+
+	.tech-card {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		width: 196px;
+		min-height: 92px;
+		padding: 16px;
+		background: rgba(251, 252, 248, 0.9);
+		border: 1px solid var(--line);
+		clip-path: polygon(0 12px, 12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+		transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+	}
+
+	.tech-card:hover {
+		transform: translateY(-5px);
+		border-color: rgba(23, 98, 122, 0.42);
+		box-shadow: 0 14px 26px rgba(12, 61, 82, 0.1);
+	}
+
+	.tech-mark {
+		display: grid;
+		flex: 0 0 44px;
+		place-items: center;
+		width: 44px;
+		height: 44px;
+		font-size: 0.76rem;
+		font-weight: 800;
+		letter-spacing: -0.04em;
+		clip-path: polygon(0 0, 100% 0, 100% 72%, 72% 100%, 0 100%);
+	}
+
+	.tech-mark img {
+		width: 28px;
+		height: 28px;
+		object-fit: contain;
+	}
+
+	.tech-mark.blue { color: #17627a; background: #d7eaf0; }
+	.tech-mark.green { color: #08712f; background: #d7eedc; }
+	.tech-mark.violet { color: #5a438c; background: #e6def3; }
+	.tech-mark.orange { color: #a9561a; background: #f5e2ce; }
+	.tech-mark.red { color: #a73e3e; background: #f3dada; }
+	.tech-mark.coral { color: #b84d3d; background: #f5dcd3; }
+	.tech-mark.yellow { color: #786316; background: #f2ebc5; }
+
+	.tech-card h3,
+	.tech-card p {
+		margin: 0;
+	}
+
+	.tech-card h3 {
+		font-size: 1rem;
+	}
+
+	.tech-card p {
+		margin-top: 3px;
+		font-size: 0.8rem;
+		color: var(--muted);
+	}
+
+	.tech-controls {
+		display: flex;
+		justify-content: center;
+		gap: 8px;
+		margin-top: 28px;
+	}
+
+	.tech-control {
+		display: grid;
+		place-items: center;
+		width: 38px;
+		height: 38px;
+		padding: 0;
+		border: 1px solid var(--line);
+		border-radius: 0;
+		background: var(--panel);
+		color: var(--text);
+		font: inherit;
+		cursor: pointer;
+		transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+	}
+
+	.tech-control:hover {
+		transform: translateY(-2px);
+		background: var(--primary);
+		color: #fff;
+	}
+
+	.play-icon { display: none; font-size: 0.7rem; }
+	.is-paused .pause-icon { display: none; }
+	.is-paused .play-icon { display: inline; }
+
+	@keyframes tech-slide {
+		from { transform: translateX(0); }
+		to { transform: translateX(calc(-50% - 8px)); }
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.tech-track { animation: none; }
+		.tech-card, .tech-control { transition: none; }
+	}
+
+	@media (max-width: 720px) {
+		.tech-section { padding: 72px 0 76px; }
+		.tech-heading { display: block; margin-bottom: 28px; }
+		.tech-intro { margin-top: 18px; }
+		.tech-card { width: 176px; min-height: 84px; }
+	}
+</style>

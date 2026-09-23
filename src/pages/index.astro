@@ -1,9 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import TechCarousel from '../components/TechCarousel.astro';
 import brandLogo from '../assets/informaticasuperior.png';
+
+const seo = {
+	title: 'Informática Superior | Desarrollo Web y Software',
+	description:
+		'Informática Superior diseña páginas web, tiendas online y software a medida para negocios que quieren crecer digitalmente.',
+};
 ---
 
-<Layout>
+<Layout seo={seo}>
 	<header class="topbar">
 		<div class="container nav">
 			<div class="brand">
@@ -24,7 +31,7 @@ import brandLogo from '../assets/informaticasuperior.png';
 		<section class="hero">
 			<img class="hero-watermark" src={brandLogo.src} alt="" aria-hidden="true" />
 			<div class="container hero-grid">
-				<div class="hero-copy">
+				<div class="hero-copy" data-reveal>
 					<p class="eyebrow">Tecnología que toma impulso</p>
 					<h1>Soluciones digitales para negocios que quieren crecer.</h1>
 					<p class="lead">
@@ -42,7 +49,7 @@ import brandLogo from '../assets/informaticasuperior.png';
 					</ul>
 				</div>
 
-				<div class="hero-visual">
+				<div class="hero-visual" data-reveal="right">
 					<!-- <div class="orbit-label orbit-label-top">Estrategia</div>
 					<div class="orbit-label orbit-label-bottom">Evolución</div> -->
 					<div class="dashboard-card">
@@ -80,7 +87,7 @@ import brandLogo from '../assets/informaticasuperior.png';
 		</section>
 
 		<section class="logos">
-			<div class="container logos-row">
+			<div class="container logos-row" data-reveal>
 				<span>Confían en nosotros</span>
 				<div class="logos-list">
 					<span>ShopFlow</span>
@@ -100,7 +107,7 @@ import brandLogo from '../assets/informaticasuperior.png';
 				</div>
 
 				<div class="cards-grid">
-					<article class="service-card">
+					<article class="service-card" data-reveal>
 						<div class="icon">01</div>
 						<h3>Software a medida</h3>
 						<p>
@@ -109,7 +116,7 @@ import brandLogo from '../assets/informaticasuperior.png';
 						</p>
 					</article>
 
-					<article class="service-card">
+					<article class="service-card" data-reveal>
 						<div class="icon">02</div>
 						<h3>Páginas web</h3>
 						<p>
@@ -118,7 +125,7 @@ import brandLogo from '../assets/informaticasuperior.png';
 						</p>
 					</article>
 
-					<article class="service-card">
+					<article class="service-card" data-reveal>
 						<div class="icon">03</div>
 						<h3>Ecommerce</h3>
 						<p>
@@ -130,13 +137,15 @@ import brandLogo from '../assets/informaticasuperior.png';
 			</div>
 		</section>
 
+		<TechCarousel />
+
 		<section id="soluciones" class="section alt">
 			<div class="container split">
-				<div>
+				<div data-reveal>
 					<p class="eyebrow">Por qué elegirnos</p>
 					<h2>Diseño serio, tecnología sólida y enfoque comercial.</h2>
 				</div>
-				<div class="benefits-list">
+				<div class="benefits-list" data-reveal="right">
 					<div class="benefit">
 						<strong>01</strong>
 						<p>Soluciones pensadas para resultados reales: ventas, leads, eficiencia y crecimiento.</p>
@@ -161,22 +170,22 @@ import brandLogo from '../assets/informaticasuperior.png';
 				</div>
 
 				<div class="steps-grid">
-					<div class="step">
+					<div class="step" data-reveal>
 						<span>1</span>
 						<h3>Diagnóstico</h3>
 						<p>Analizamos tus objetivos, audiencia y necesidades reales.</p>
 					</div>
-					<div class="step">
+					<div class="step" data-reveal>
 						<span>2</span>
 						<h3>Propuesta</h3>
 						<p>Definimos alcance, funcionalidades, presupuesto y roadmap.</p>
 					</div>
-					<div class="step">
+					<div class="step" data-reveal>
 						<span>3</span>
 						<h3>Diseño</h3>
 						<p>Diseñamos interfaces enfocadas en claridad, experiencia y conversión.</p>
 					</div>
-					<div class="step">
+					<div class="step" data-reveal>
 						<span>4</span>
 						<h3>Desarrollo</h3>
 						<p>Construimos la solución con tecnología moderna y buenas prácticas.</p>
@@ -193,19 +202,19 @@ import brandLogo from '../assets/informaticasuperior.png';
 				</div>
 
 				<div class="stats-grid">
-					<div class="stat-box">
+					<div class="stat-box" data-reveal>
 						<strong>+60%</strong>
 						<span>más engagement</span>
 					</div>
-					<div class="stat-box">
+					<div class="stat-box" data-reveal>
 						<strong>+3x</strong>
 						<span>más velocidad de venta</span>
 					</div>
-					<div class="stat-box">
+					<div class="stat-box" data-reveal>
 						<strong>24/7</strong>
 						<span>presencia digital activa</span>
 					</div>
-					<div class="stat-box">
+					<div class="stat-box" data-reveal>
 						<strong>SEO</strong>
 						<span>mejor posicionamiento</span>
 					</div>
@@ -221,12 +230,12 @@ import brandLogo from '../assets/informaticasuperior.png';
 				</div>
 
 				<div class="testimonial-grid">
-					<blockquote>
+					<blockquote data-reveal>
 						“Nos ayudaron a rediseñar nuestra web y a mejorar la experiencia de compra. En pocos meses
 						mejoramos la conversión de clientes.”
 						<footer>Marina López — UrbanCart</footer>
 					</blockquote>
-					<blockquote>
+					<blockquote data-reveal>
 						“Necesitábamos un sistema para gestionar pedidos y operaciones internas. Lo entregaron con una
 						estructura clara y muy usable.”
 						<footer>Diego Ruiz — NexaLab</footer>
@@ -236,7 +245,7 @@ import brandLogo from '../assets/informaticasuperior.png';
 		</section>
 
 		<section id="contacto" class="section cta-section">
-			<div class="container cta-box">
+			<div class="container cta-box" data-reveal>
 				<div>
 					<p class="eyebrow">¿Listo para tu próximo proyecto?</p>
 					<h2>Hagamos algo que te ayude a vender más y operar mejor.</h2>
@@ -258,7 +267,68 @@ import brandLogo from '../assets/informaticasuperior.png';
 	</footer>
 </Layout>
 
+<script>
+	const revealElements = document.querySelectorAll<HTMLElement>('[data-reveal]');
+	document.documentElement.classList.add('js');
+
+	const revealObserver = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('is-visible');
+					revealObserver.unobserve(entry.target);
+				}
+			});
+		},
+		{ threshold: 0.14 },
+	);
+
+	revealElements.forEach((element) => revealObserver.observe(element));
+</script>
+
 <style>
+	.js [data-reveal] {
+		opacity: 0;
+		transform: translateY(24px);
+		transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.js [data-reveal="right"] {
+		transform: translateX(24px);
+	}
+
+	.js [data-reveal].is-visible {
+		opacity: 1;
+		transform: translate(0);
+	}
+
+	.cards-grid [data-reveal]:nth-child(2),
+	.steps-grid [data-reveal]:nth-child(2),
+	.stats-grid [data-reveal]:nth-child(2),
+	.testimonial-grid [data-reveal]:nth-child(2) {
+		transition-delay: 0.08s;
+	}
+
+	.cards-grid [data-reveal]:nth-child(3),
+	.steps-grid [data-reveal]:nth-child(3),
+	.stats-grid [data-reveal]:nth-child(3) {
+		transition-delay: 0.16s;
+	}
+
+	.steps-grid [data-reveal]:nth-child(4),
+	.stats-grid [data-reveal]:nth-child(4) {
+		transition-delay: 0.24s;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.js [data-reveal],
+		.js [data-reveal="right"] {
+			opacity: 1;
+			transform: none;
+			transition: none;
+		}
+	}
+
 	.container {
 		width: min(1120px, calc(100% - 32px));
 		margin: 0 auto;
