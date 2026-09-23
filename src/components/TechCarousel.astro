@@ -1,20 +1,39 @@
 ---
-const technologies = [
+type Technology = {
+	name: string;
+	category: string;
+	logo?: string;
+	logoColor?: string;
+	iconUrl?: string;
+	tone: string;
+};
+
+const technologies: Technology[] = [
 	{ name: 'React', category: 'Frontend', logo: 'react', tone: 'blue' },
 	{ name: 'Node.js', category: 'Backend', logo: 'nodedotjs', tone: 'green' },
 	{ name: '.NET', category: 'Backend', logo: 'dotnet', tone: 'violet' },
 	{ name: 'MySQL', category: 'Datos', logo: 'mysql', tone: 'orange' },
-	{ name: 'SQL Server', category: 'Datos', logo: 'microsoftsqlserver', tone: 'red' },
+	{
+		name: 'SQL Server',
+		category: 'Datos',
+		iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-original.svg',
+		tone: 'red',
+	},
 	{ name: 'TypeScript', category: 'Frontend', logo: 'typescript', tone: 'blue' },
 	{ name: 'Astro', category: 'Web', logo: 'astro', tone: 'coral' },
 	{ name: 'JavaScript', category: 'Frontend', logo: 'javascript', tone: 'yellow' },
-	{ name: 'C#', category: 'Backend', logo: 'csharp', tone: 'violet' },
+	{
+		name: 'C#',
+		category: 'Backend',
+		iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg',
+		tone: 'violet',
+	},
 	{ name: 'Git', category: 'Herramientas', logo: 'git', tone: 'orange' },
 ];
 ---
 
 <section class="tech-section" aria-labelledby="tech-title">
-	<div class="container tech-heading">
+	<div class="container tech-heading" data-reveal>
 		<div>
 			<p class="eyebrow">Nuestro stack</p>
 			<h2 id="tech-title">Tecnología que se adapta a cada desafío.</h2>
@@ -28,7 +47,7 @@ const technologies = [
 				{technologies.map((technology) => (
 					<article class="tech-card" data-tech-card>
 						<span class={`tech-mark ${technology.tone}`} aria-hidden="true">
-							<img src={`https://cdn.simpleicons.org/${technology.logo}`} alt="" width="28" height="28" loading="lazy" />
+							<img src={technology.iconUrl ?? `https://cdn.simpleicons.org/${technology.logo}/${technology.logoColor ?? '10232A'}`} alt={`${technology.name} logo`} width="28" height="28" loading="lazy" />
 						</span>
 						<div>
 							<h3>{technology.name}</h3>
@@ -39,7 +58,7 @@ const technologies = [
 				{technologies.map((technology) => (
 					<article class="tech-card" aria-hidden="true">
 						<span class={`tech-mark ${technology.tone}`}>
-							<img src={`https://cdn.simpleicons.org/${technology.logo}`} alt="" width="28" height="28" loading="lazy" />
+							<img src={technology.iconUrl ?? `https://cdn.simpleicons.org/${technology.logo}/${technology.logoColor ?? '10232A'}`} alt="" width="28" height="28" loading="lazy" />
 						</span>
 						<div>
 							<h3>{technology.name}</h3>

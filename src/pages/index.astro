@@ -101,7 +101,7 @@ const seo = {
 
 		<section id="servicios" class="section">
 			<div class="container">
-				<div class="section-head">
+				<div class="section-head" data-reveal>
 					<p class="eyebrow">Servicios</p>
 					<h2>Todo lo que necesitas para crecer online.</h2>
 				</div>
@@ -164,7 +164,7 @@ const seo = {
 
 		<section id="proceso" class="section">
 			<div class="container">
-				<div class="section-head">
+				<div class="section-head" data-reveal>
 					<p class="eyebrow">Proceso</p>
 					<h2>Un camino simple para convertir tu idea en producto.</h2>
 				</div>
@@ -196,7 +196,7 @@ const seo = {
 
 		<section class="section alt">
 			<div class="container">
-				<div class="section-head">
+				<div class="section-head" data-reveal>
 					<p class="eyebrow">Resultados</p>
 					<h2>Lo que genera una presencia digital bien hecha.</h2>
 				</div>
@@ -224,7 +224,7 @@ const seo = {
 
 		<section class="section testimonials">
 			<div class="container">
-				<div class="section-head">
+				<div class="section-head" data-reveal>
 					<p class="eyebrow">Testimonios</p>
 					<h2>Clientes que ya vieron resultados.</h2>
 				</div>
@@ -268,61 +268,78 @@ const seo = {
 </Layout>
 
 <script>
-	const revealElements = document.querySelectorAll<HTMLElement>('[data-reveal]');
-	document.documentElement.classList.add('js');
+	const initializeReveal = () => {
+		document.documentElement.classList.add('js');
+		const revealElements = document.querySelectorAll<HTMLElement>('[data-reveal]');
 
-	const revealObserver = new IntersectionObserver(
-		(entries) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					entry.target.classList.add('is-visible');
-					revealObserver.unobserve(entry.target);
-				}
-			});
-		},
-		{ threshold: 0.14 },
-	);
+		if (!revealElements.length || !('IntersectionObserver' in window)) {
+			revealElements.forEach((element) => element.classList.add('is-visible'));
+			return;
+		}
 
-	revealElements.forEach((element) => revealObserver.observe(element));
+		const revealObserver = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('is-visible');
+						revealObserver.unobserve(entry.target);
+					}
+				});
+			},
+			{ threshold: 0.12, rootMargin: '0px 0px -48px' },
+		);
+
+		revealElements.forEach((element) => revealObserver.observe(element));
+	};
+
+	requestAnimationFrame(initializeReveal);
+	document.addEventListener('astro:after-swap', initializeReveal);
 </script>
 
 <style>
-	.js [data-reveal] {
+	:global(.js) [data-reveal] {
 		opacity: 0;
-		transform: translateY(24px);
-		transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+		transform: translateY(34px);
+		transition: opacity 1.05s ease, transform 1.05s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
-	.js [data-reveal="right"] {
-		transform: translateX(24px);
+	:global(.js) [data-reveal="right"] {
+		transform: translateX(34px);
 	}
 
-	.js [data-reveal].is-visible {
+	:global(.js) [data-reveal].is-visible {
 		opacity: 1;
 		transform: translate(0);
+	}
+
+	:global(.js) .hero-copy[data-reveal],
+	:global(.js) .hero-visual[data-reveal],
+	:global(.js) .section-head[data-reveal],
+	:global(.js) .cta-box[data-reveal] {
+		transition-duration: 1.1s;
 	}
 
 	.cards-grid [data-reveal]:nth-child(2),
 	.steps-grid [data-reveal]:nth-child(2),
 	.stats-grid [data-reveal]:nth-child(2),
 	.testimonial-grid [data-reveal]:nth-child(2) {
-		transition-delay: 0.08s;
+		transition-delay: 0.12s;
 	}
 
 	.cards-grid [data-reveal]:nth-child(3),
 	.steps-grid [data-reveal]:nth-child(3),
 	.stats-grid [data-reveal]:nth-child(3) {
-		transition-delay: 0.16s;
+		transition-delay: 0.24s;
 	}
 
 	.steps-grid [data-reveal]:nth-child(4),
 	.stats-grid [data-reveal]:nth-child(4) {
-		transition-delay: 0.24s;
+		transition-delay: 0.36s;
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.js [data-reveal],
-		.js [data-reveal="right"] {
+		:global(.js) [data-reveal],
+		:global(.js) [data-reveal="right"] {
 			opacity: 1;
 			transform: none;
 			transition: none;
@@ -419,8 +436,19 @@ const seo = {
 		height: auto;
 		opacity: 0.2;
 		transform: translateY(-50%) rotate(-8deg);
+		animation: watermark-drift 18s ease-in-out infinite;
 		pointer-events: none;
 		user-select: none;
+	}
+
+	@keyframes watermark-drift {
+		0%,
+		100% {
+			transform: translateY(-50%) rotate(-8deg);
+		}
+		50% {
+			transform: translateY(calc(-50% - 7px)) rotate(-7.5deg);
+		}
 	}
 
 	.hero-grid {
@@ -900,6 +928,12 @@ const seo = {
 		.cta-box {
 			display: grid;
 			justify-items: start;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.hero-watermark {
+			animation: none;
 		}
 	}
 </style>
