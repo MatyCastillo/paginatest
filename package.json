@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@jdevalk/astro-seo-graph": "^2.2.0",
-    "astro": "^7.3.3"
+    "astro": "^7.3.4"
   },
   "allowScripts": {
     "esbuild": true
